@@ -87,10 +87,14 @@ struct HomeView: View {
         .onAppear {
             viewModel.startTracking()
             viewModel.loadAnchors()
+        }
+        .onReceive(viewModel.$currentLocation) { newLocation in
+            guard let newLocation = newLocation else { return }
+            userLocation = newLocation
             
-            if let location = viewModel.currentLocation {
+            if visibleRegion == nil {
                 position = .region(MKCoordinateRegion(
-                    center: location,
+                    center: newLocation,
                     span: defaultZoomSpan
                 ))
             }

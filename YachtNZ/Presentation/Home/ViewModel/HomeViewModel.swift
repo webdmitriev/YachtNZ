@@ -31,6 +31,9 @@ final class HomeViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
-        currentLocation = location.coordinate
+        
+        DispatchQueue.main.async {
+            self.currentLocation = location.coordinate
+        }
     }
 }

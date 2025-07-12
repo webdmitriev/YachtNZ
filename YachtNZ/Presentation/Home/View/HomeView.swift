@@ -18,7 +18,7 @@ struct HomeView: View {
     @State private var userLocation: CLLocationCoordinate2D?
     
     // Настройки масштабирования
-    private let defaultZoomSpan = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+    private let defaultZoomSpan = MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
     private let zoomInFactor: Double = 0.5
     private let zoomOutFactor: Double = 2.0
     
@@ -91,13 +91,11 @@ struct HomeView: View {
         .onReceive(viewModel.$currentLocation) { newLocation in
             guard let newLocation = newLocation else { return }
             userLocation = newLocation
-            
-            if visibleRegion == nil {
-                position = .region(MKCoordinateRegion(
-                    center: newLocation,
-                    span: defaultZoomSpan
-                ))
-            }
+
+            position = .region(MKCoordinateRegion(
+                center: newLocation,
+                span: defaultZoomSpan
+            ))
         }
     }
     

@@ -36,4 +36,8 @@ final class HomeViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
             self.currentLocation = location.coordinate
         }
     }
+    
+    func defaultRegion(for location: CLLocationCoordinate2D) -> MKCoordinateRegion {
+        MKCoordinateRegion(center: location, span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
+    }
 }
